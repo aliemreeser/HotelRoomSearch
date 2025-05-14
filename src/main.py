@@ -1,0 +1,183 @@
+import os
+import json
+import argparse
+from typing import List, Dict, Any
+from src.vision_agent import VisionAgent
+from src.query_agent import QueryAgent
+from src.hybrid_search import HybridSearch
+from dotenv import load_dotenv
+import time 
+# Load environment variables
+load_dotenv()
+
+# Create data directory if it doesn't exist
+DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
+os.makedirs(DATA_DIR, exist_ok=True)
+
+class OBiletHotelSearch:
+    """
+    Main system that integrates VisionAgent, QueryAgent and HybridSearch
+    for filtering hotel rooms based on user preferences
+    """
+    
+    def __init__(self):
+        """Initialize the search system"""
+        self.vision_agent = VisionAgent()
+        self.query_agent = QueryAgent()
+        self.hybrid_search = HybridSearch(keyword_weight=0.6, semantic_weight=0.4)
+        self.analyzed_images = {}
+        
+    def load_analyzed_images(self, file_path: str = None) -> Dict[str, Dict[str, Any]]:
+        """
+        Load previously analyzed images from a JSON file
+        """
+        if file_path is None:
+            file_path = os.path.join(DATA_DIR, "hotel_image_analysis.json")
+        
+        if os.path.exists(file_path):
+            try:
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    self.analyzed_images = json.load(f)
+                print(f"Yüklendi: {len(self.analyzed_images)} analiz edilmiş görsel.")
+            except Exception as e:
+                print(f"Analiz edilmiş görselleri yüklerken hata: {e}")
+        else:
+            print(f"Kayıtlı analiz bulunamadı: {file_path}")
+        
+        return self.analyzed_images
+    
+    def save_analyzed_images(self, file_path: str = None) -> None:
+        """
+        Save analyzed images to a JSON file
+        """
+        if file_path is None:
+            file_path = os.path.join(DATA_DIR, "hotel_image_analysis.json")
+        
+        with open(file_path, 'w', encoding='utf-8') as f:
+            json.dump(self.analyzed_images, f, indent=2, ensure_ascii=False)
+        print(f"Kaydedildi: {len(self.analyzed_images)} analiz edilmiş görsel.")
+    
+    def analyze_images(self, image_urls: List[str], force_reanalyze: bool = False, wait_time: float = 4.0) -> Dict[str, Dict[str, Any]]:
+        """
+        Analyze a list of image URLs using VisionAgent
+        """
+        # Load existing analysis if available
+        if not self.analyzed_images:
+            self.load_analyzed_images()
+        
+        # Determine which images need analysis
+        if force_reanalyze:
+            urls_to_analyze = image_urls
+        else:
+            urls_to_analyze = [url for url in image_urls if url not in self.analyzed_images]
+        
+        if not urls_to_analyze:
+            print("Tüm görseller zaten analiz edilmiş.")
+            return self.analyzed_images
+        
+        print(f"{len(urls_to_analyze)} görsel analiz ediliyor...")
+        
+        # Analyze each image
+        for i, url in enumerate(urls_to_analyze, 1):
+            try:
+                print(f"[{i}/{len(urls_to_analyze)}] Analiz ediliyor: {url}")
+                result = self.vision_agent.analyze_image(url)
+                self.analyzed_images[url] = result
+                
+                # Save intermediate results
+                if i % 5 == 0 or i == len(urls_to_analyze):
+                    self.save_analyzed_images()
+                
+                # Wait between API calls to avoid rate limiting
+                if i < len(urls_to_analyze):  # No need to wait after the last image
+                    print(f"API hız sınırını aşmamak için {wait_time} saniye bekleniyor...")
+                    time.sleep(wait_time)
+            except Exception as e:
+                print(f"Görsel analiz edilirken hata: {url}: {e}")
+                # Still wait after errors to give the API time to recover
+                if i < len(urls_to_analyze):
+                    print(f"Hata sonrası {wait_time} saniye bekleniyor...")
+                    time.sleep(wait_time)
+        
+        return self.analyzed_images
+    
+    def search(self, user_query: str) -> str:
+        """
+        Process a user query and search for matching rooms
+        
+        Args:
+            user_query: User's textual query
+            
+        Returns:
+            Formatted search results
+        """
+        print(f"Sorgu işleniyor: '{user_query}'")
+        
+        # Process the query using QueryAgent
+        query_json = self.query_agent.process_query(user_query)
+        
+        # Show the structured query
+        print("\nYapılandırılmış sorgu:")
+        print(json.dumps(query_json, indent=2, ensure_ascii=False))
+        
+        # Perform hybrid search
+        search_results = self.hybrid_search.hybrid_search(
+            query_json, 
+            self.analyzed_images,
+            keyword_min_score=0.3,
+            semantic_min_score=0.5,
+            max_results=5
+        )
+        
+        # Format and return the results
+        formatted_results = self.hybrid_search.format_search_results(search_results, self.analyzed_images)
+        return formatted_results
+
+def main():
+    """
+    Main function to run the hotel room search system
+    """
+    parser = argparse.ArgumentParser(description="OBilet Hotel Room Image Filtering System")
+    parser.add_argument("--analyze", action="store_true", help="Otel görselleri analiz et")
+    parser.add_argument("--force", action="store_true", help="Görselleri tekrar analiz et")
+    parser.add_argument("--query", type=str, help="Arama sorgusu")
+    parser.add_argument("--wait", type=float, default=1.0, help="Analizler arası bekleme süresi (saniye)")
+    args = parser.parse_args()
+    
+    # Create search system
+    search_system = OBiletHotelSearch()
+    
+    # Generate image URLs for OBilet (1.jpg to 25.jpg)
+    base_url = "https://static.obilet.com.s3.eu-central-1.amazonaws.com/CaseStudy/HotelImages/"
+    hotel_images = [f"{base_url}{i}.jpg" for i in range(1, 26)]
+    
+    # Analyze images if requested
+    if args.analyze:
+        search_system.analyze_images(hotel_images, force_reanalyze=args.force, wait_time=args.wait)
+    else:
+        # Load existing analysis
+        search_system.load_analyzed_images()
+    
+    # Process query if provided
+    if args.query:
+        results = search_system.search(args.query)
+        print("\nArama Sonuçları:")
+        print(results)
+    # If no query provided and not analyzing, run interactive mode
+    elif not args.analyze:
+        # Interactive mode
+        print("\nOBilet Otel Odası Arama Sistemi")
+        print("Çıkmak için 'exit' yazın")
+        
+        while True:
+            user_query = input("\nArama sorgusunu girin: ")
+            
+            if user_query.lower() in ["exit", "quit", "q", "çıkış"]:
+                break
+                
+            results = search_system.search(user_query)
+            print("\nArama Sonuçları:")
+            print(results)
+
+if __name__ == "__main__":
+    main() 

@@ -1,0 +1,308 @@
+{
+  "https://static.obilet.com.s3.eu-central-1.amazonaws.com/CaseStudy/HotelImages/1.jpg": {
+    "room_type": "double",
+    "max_capacity": 2,
+    "view_type": "sea",
+    "features": [
+      "balcony",
+      "desk",
+      "air conditioning",
+      "TV",
+      "bathtub"
+    ],
+    "description": "This modern double room features a contemporary design with a king-sized bed adorned with decorative pillows and a contrasting throw blanket. It includes a seating area with a plush ottoman and a sleek desk. A sliding glass door opens to a private balcony offering stunning views of the sea. The bathroom boasts a stylish bathtub and a modern vanity with a well-lit mirror, creating a luxurious and relaxing ambiance."
+  },
+  "https://static.obilet.com.s3.eu-central-1.amazonaws.com/CaseStudy/HotelImages/2.jpg": {
+    "room_type": "double",
+    "max_capacity": 2,
+    "view_type": "",
+    "features": [
+      "balcony",
+      "desk",
+      "air conditioning",
+      "TV"
+    ],
+    "description": "The room has a warm ambiance with wooden accents, featuring a double bed adorned with decorative pillows. A desk is present along with a chair and a kettle. There's a mounted TV on the wall, and the large window is dressed with light curtains, allowing natural light to fill the space. The wooden ceiling and flooring enhance the cozy atmosphere."
+  },
+  "https://static.obilet.com.s3.eu-central-1.amazonaws.com/CaseStudy/HotelImages/3.jpg": {
+    "room_type": "double",
+    "max_capacity": 2,
+    "view_type": "city",
+    "features": [
+      "balcony",
+      "desk",
+      "air conditioning",
+      "TV"
+    ],
+    "description": "The room is elegantly designed with a modern touch, featuring a comfortable double bed with plush pillows and a stylish headboard. There is a cozy seating area with a chair and a small round table, perfect for relaxation. The large glass doors provide access to a private balcony with a city view, allowing natural light to fill the space. The walls are adorned with a muted textured wallpaper, complemented by soft, rich curtains. Ambient lighting adds warmth to the room, creating a welcoming atmosphere. A desk is available for work or leisure activities."
+  },
+  "https://static.obilet.com.s3.eu-central-1.amazonaws.com/CaseStudy/HotelImages/4.jpg": {
+    "room_type": "suite",
+    "max_capacity": 4,
+    "view_type": "",
+    "features": [
+      "balcony",
+      "desk",
+      "air conditioning",
+      "TV",
+      "bathtub"
+    ],
+    "description": "The suite features a spacious living area with a comfortable gray sofa and a wooden coffee table, accompanied by a dining area. The bedroom area showcases a neatly made bed with a brown and white color scheme and soft lighting. The room has a modern bathroom area visible, equipped with a luxurious bathtub. The overall ambiance is elegant and inviting, with wood accents adding warmth."
+  },
+  "https://static.obilet.com.s3.eu-central-1.amazonaws.com/CaseStudy/HotelImages/5.jpg": {
+    "room_type": "single",
+    "max_capacity": 1,
+    "view_type": "",
+    "features": [
+      "balcony",
+      "desk",
+      "air conditioning",
+      "TV",
+      "telephone"
+    ],
+    "description": "The room has a cozy ambiance with wooden elements and traditional decor. It features a neatly made bed with an intricate orange bedspread. A wooden desk with a blue top is accompanied by a plush red stool, and there's an antique-style telephone for added character. A flat-screen TV is mounted on the wall opposite the bed, and a blue chair complements the decor. The room is well-lit by a combination of natural light and a standing lamp."
+  },
+  "https://static.obilet.com.s3.eu-central-1.amazonaws.com/CaseStudy/HotelImages/6.jpg": {
+    "room_type": "triple",
+    "max_capacity": 5,
+    "view_type": "",
+    "features": [
+      "air conditioning",
+      "TV",
+      "desk"
+    ],
+    "description": "The room features three beds arranged neatly with soft bedding. It has a modern and cozy ambiance, enhanced by large windows with sheer curtains allowing natural light. The floor is wooden with a decorative rug adding warmth. There are two bedside tables and a desk available for use."
+  },
+  "https://static.obilet.com.s3.eu-central-1.amazonaws.com/CaseStudy/HotelImages/7.jpg": {
+    "room_type": "double",
+    "max_capacity": 4,
+    "view_type": "",
+    "features": [
+      "balcony",
+      "desk",
+      "air conditioning",
+      "TV"
+    ],
+    "description": "The room features two beds with a modern design, accompanied by decorative cushions. A small work desk is paired with a pink chair. The room's ambiance is bright and contemporary, complemented by natural light coming through large windows covered with light curtains. Additional features include a wardrobe and bedside lights for added comfort."
+  },
+  "https://static.obilet.com.s3.eu-central-1.amazonaws.com/CaseStudy/HotelImages/8.jpg": {
+    "room_type": "triple",
+    "max_capacity": 3,
+    "view_type": "",
+    "features": [
+      "air conditioning",
+      "TV",
+      "desk",
+      "coffee/tea maker",
+      "seating area",
+      "wardrobe"
+    ],
+    "description": "The room has three single beds with plush, tufted headboards and elegant bedding. There is a stylish light fixture above providing ample illumination. The décor features a neutral color palette complemented by patterned wallpaper and tasteful artwork on the wall. Large windows with sheer curtains allow natural light to flood in. A seating area is present with a small table and a comfortable chair. The flooring is wooden, enhancing the room's modern yet cozy feel."
+  },
+  "https://static.obilet.com.s3.eu-central-1.amazonaws.com/CaseStudy/HotelImages/9.jpg": {
+    "room_type": "triple",
+    "max_capacity": 3,
+    "view_type": "",
+    "features": [
+      "desk",
+      "air conditioning",
+      "TV",
+      "window",
+      "lamp"
+    ],
+    "description": "The room features three beds, with two single beds and one double bed, decorated with soft, neutral tones and modern decor. The ambiance is bright, enhanced by natural light from large windows covered with sheer curtains. There are bedside lamps, a small desk, and a decorative piece of art on the wall. The floor is covered with a textured carpet, and the overall style is elegant and contemporary."
+  },
+  "https://static.obilet.com.s3.eu-central-1.amazonaws.com/CaseStudy/HotelImages/10.jpg": {
+    "room_type": "double",
+    "max_capacity": 2,
+    "view_type": "",
+    "features": [
+      "air conditioning",
+      "TV",
+      "desk",
+      "plant"
+    ],
+    "description": "The room features two single beds with elegant, striped bedding. The decor includes warm tones and wooden furniture, creating a cozy ambiance. A flat-screen TV is mounted on the wall, and a desk is positioned against one side. Large windows with light curtains allow natural light to fill the space, complemented by a decorative chandelier."
+  },
+  "https://static.obilet.com.s3.eu-central-1.amazonaws.com/CaseStudy/HotelImages/11.jpg": {
+    "room_type": "double",
+    "max_capacity": 2,
+    "view_type": "",
+    "features": [
+      "air conditioning",
+      "TV",
+      "desk",
+      "armchair"
+    ],
+    "description": "The room features two single beds with dark grey bedding and patterned cushions. The decor includes a light-colored wall with a distinctive green and yellow patterned accent wall. There is an armchair near the window, which suggests a spacious and bright ambiance. The room has tiled floors and provides a clean, modern aesthetic."
+  },
+  "https://static.obilet.com.s3.eu-central-1.amazonaws.com/CaseStudy/HotelImages/12.jpg": {
+    "room_type": "double",
+    "max_capacity": 2,
+    "view_type": "city",
+    "features": [
+      "balcony",
+      "desk",
+      "air conditioning",
+      "TV"
+    ],
+    "description": "The room features a modern design with a large window offering a stunning city view. It includes a comfortable chair and a small table, a desk area for work, and contemporary decor with light wooden flooring. The ambiance is bright and inviting, enhanced by natural light streaming in through the windows."
+  },
+  "https://static.obilet.com.s3.eu-central-1.amazonaws.com/CaseStudy/HotelImages/13.jpg": {
+    "room_type": "unknown",
+    "max_capacity": 0,
+    "view_type": "sea",
+    "features": [
+      "balcony",
+      "seating area"
+    ],
+    "description": "The room features a balcony with a stunning view of the sea and surrounding hills. There are two white chairs and a small table on the balcony, suggesting a cozy seating area. The ambiance is bright and inviting, enhanced by the sunny weather and clear blue skies."
+  },
+  "https://static.obilet.com.s3.eu-central-1.amazonaws.com/CaseStudy/HotelImages/14.jpg": {
+    "room_type": "double",
+    "max_capacity": 2,
+    "view_type": "sea",
+    "features": [
+      "balcony",
+      "desk",
+      "air conditioning",
+      "TV"
+    ],
+    "description": "This cozy double room features a wooden ceiling and modern decor, with a comfortable double bed and a small seating area. The large windows offer a stunning sea view and allow natural light to fill the space. A desk with a stool is conveniently placed near the window, and the ambiance is bright and airy, complemented by light-colored furnishings."
+  },
+  "https://static.obilet.com.s3.eu-central-1.amazonaws.com/CaseStudy/HotelImages/15.jpg": {
+    "room_type": "suite",
+    "max_capacity": 2,
+    "view_type": "sea",
+    "features": [
+      "balcony",
+      "air conditioning",
+      "TV",
+      "jacuzzi",
+      "coffee table"
+    ],
+    "description": "This elegant suite features a cozy living area with plush seating and a large bed adorned in rich fabric, complemented by decorative artwork. The room is illuminated by a chandelier, creating a warm ambiance. A jacuzzi is situated prominently, adding a luxury touch, while large windows offer stunning sea views. The decor includes mosaic tiles on one wall, adding to the opulence."
+  },
+  "https://static.obilet.com.s3.eu-central-1.amazonaws.com/CaseStudy/HotelImages/16.jpg": {
+    "room_type": "single",
+    "max_capacity": 1,
+    "view_type": "",
+    "features": [
+      "balcony",
+      "desk",
+      "air conditioning"
+    ],
+    "description": "The room features a modern and minimalistic design with light wood flooring and a calming color palette. There's a single bed adorned with decorative pillows, a desk with a single chair, and a balcony that provides natural light. The ambiance is bright and clean, suitable for relaxation or work."
+  },
+  "https://static.obilet.com.s3.eu-central-1.amazonaws.com/CaseStudy/HotelImages/17.jpg": {
+    "room_type": "double",
+    "max_capacity": 2,
+    "view_type": "sea",
+    "features": [
+      "balcony",
+      "air conditioning",
+      "TV"
+    ],
+    "description": "The room showcases a modern design with a comfortable double bed featuring plush pillows. It has a large window that opens to a beautiful balcony overlooking the sea, perfect for enjoying the view. The decor is minimalistic, with a warm wooden headboard and a stylish pendant light adding a contemporary touch. Curtains frame the window, enhancing the airy ambiance. The flooring appears to be a light-colored wood, contributing to a chic, clean look. The balcony is furnished with two chairs and a small table, ideal for relaxation."
+  },
+  "https://static.obilet.com.s3.eu-central-1.amazonaws.com/CaseStudy/HotelImages/18.jpg": {
+    "room_type": "double",
+    "max_capacity": 2,
+    "view_type": "",
+    "features": [
+      "balcony",
+      "desk",
+      "air conditioning",
+      "TV"
+    ],
+    "description": "The room features a modern design with neutral tones and a cozy ambiance. A comfortable double bed is placed against a nicely detailed headboard. There's a desk with a chair, ideal for work. A large window allows for natural light, and a balcony adds outdoor access. The décor includes artwork on the wall, and the room is equipped with air conditioning and a wall-mounted television."
+  },
+  "https://static.obilet.com.s3.eu-central-1.amazonaws.com/CaseStudy/HotelImages/19.jpg": {
+    "room_type": "double",
+    "max_capacity": 2,
+    "view_type": "",
+    "features": [
+      "air conditioning",
+      "TV",
+      "desk",
+      "seating area",
+      "lamps",
+      "coffee station"
+    ],
+    "description": "The room features an elegant design with a plush double bed adorned with decorative pillows and a fashionable bedspread. It has a stylish bedside lamp and a decorative rug underfoot, enhancing the cozy atmosphere. There’s a comfortable seating area with a rich red armchair and a small table alongside, perfect for relaxation. A modern work desk with a chair is also present, providing a functional space. Large windows dressed with red curtains allow natural light to fill the room, while the chandelier adds a touch of sophistication."
+  },
+  "https://static.obilet.com.s3.eu-central-1.amazonaws.com/CaseStudy/HotelImages/20.jpg": {
+    "room_type": "double",
+    "max_capacity": 2,
+    "view_type": "",
+    "features": [
+      "balcony",
+      "air conditioning",
+      "TV"
+    ],
+    "description": "The room features a stylish decor with a modern ambiance. Inside, there is a comfortable double bed with decorative pillows and bedside lamps. The room includes a TV mounted on the wall and offers ample natural light through large windows. Adjacent to the room is a private balcony furnished with white plastic chairs, providing a pleasant outdoor space with a green wall for privacy."
+  },
+  "https://static.obilet.com.s3.eu-central-1.amazonaws.com/CaseStudy/HotelImages/21.jpg": {
+    "room_type": "double",
+    "max_capacity": 2,
+    "view_type": "sea",
+    "features": [
+      "balcony",
+      "desk",
+      "air conditioning",
+      "TV"
+    ],
+    "description": "This is a cozy double room featuring a modern and elegant design. The walls are adorned with a stylish wallpaper, and the room includes a comfortable bed with neatly arranged linens. It has a small balcony that offers a stunning view of the sea, along with large windows that allow natural light to flow in, complemented by sheer curtains. A wooden desk with a chair is positioned in the room, accommodating work needs, while a TV is mounted on the wall for entertainment. The ambiance is warm and inviting, enhanced by subtle lighting."
+  },
+  "https://static.obilet.com.s3.eu-central-1.amazonaws.com/CaseStudy/HotelImages/22.jpg": {
+    "room_type": "double",
+    "max_capacity": 4,
+    "view_type": "",
+    "features": [
+      "wooden ceiling",
+      "windows",
+      "curtains",
+      "bedding",
+      "decorative pillows"
+    ],
+    "description": "The room has a charming rustic ambiance with a wooden ceiling and floral patterned bedding. It features two separate beds and a shared space, creating a cozy atmosphere. There is a large window letting in natural light, enhancing the inviting environment."
+  },
+  "https://static.obilet.com.s3.eu-central-1.amazonaws.com/CaseStudy/HotelImages/23.jpg": {
+    "room_type": "double",
+    "max_capacity": 2,
+    "view_type": "sea",
+    "features": [
+      "air conditioning",
+      "TV",
+      "desk",
+      "balcony"
+    ],
+    "description": "This bright and airy double room features a large bed with crisp white linens and two bedside tables. A flat-screen TV is mounted on the wall opposite the bed, and there is a stylish desk with a chair. The room has large windows that open onto a balcony overlooking the sea, providing stunning views. The decor is simple yet elegant with a mix of modern and traditional artwork adorning the walls. The ambiance is serene and relaxing."
+  },
+  "https://static.obilet.com.s3.eu-central-1.amazonaws.com/CaseStudy/HotelImages/24.jpg": {
+    "room_type": "double",
+    "max_capacity": 2,
+    "view_type": "garden",
+    "features": [
+      "air conditioning",
+      "desk",
+      "TV"
+    ],
+    "description": "This charming double room features two single beds with elegant headboards, decorated with teal accents. The room has a wooden ceiling that adds warmth, and large windows provide a picturesque view of the garden. A cozy seating area with two chairs and a small table invites relaxation, while a desk offers a work space. The room is well-lit and has a pleasant ambiance."
+  },
+  "https://static.obilet.com.s3.eu-central-1.amazonaws.com/CaseStudy/HotelImages/25.jpg": {
+    "room_type": "double",
+    "max_capacity": 2,
+    "view_type": "garden",
+    "features": [
+      "balcony",
+      "desk",
+      "air conditioning",
+      "TV",
+      "kettle",
+      "mirror",
+      "table and chairs"
+    ],
+    "description": "The room features a modern and clean design with a light color palette. A comfortable double bed is adorned with decorative cushions. The large windows provide an excellent garden view and allow natural light to fill the room. A small balcony with seating is visible outside. The room includes a workspace with a desk and a chair, a wall-mounted TV, and various amenities including a kettle and refreshments. The ambiance is serene and inviting, perfect for relaxation."
+  }
+}

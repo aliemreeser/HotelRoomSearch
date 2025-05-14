@@ -1,0 +1,301 @@
+
+    <!DOCTYPE html>
+    <html lang="tr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>OBilet Otel Odası Arama</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            .result-card {
+                transition: transform 0.3s;
+                margin-bottom: 20px;
+            }
+            .result-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+            .match-indicator {
+                font-weight: bold;
+            }
+            .match-true {
+                color: green;
+            }
+            .match-false {
+                color: red;
+            }
+            .feature-list {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 5px;
+            }
+            .feature-item {
+                background-color: #f8f9fa;
+                padding: 2px 8px;
+                border-radius: 10px;
+                font-size: 0.9em;
+            }
+            .score-bar {
+                height: 5px;
+                border-radius: 2px;
+                margin-bottom: 10px;
+            }
+            .loader {
+                display: none;
+                border: 5px solid #f3f3f3;
+                border-top: 5px solid #3498db;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                animation: spin 2s linear infinite;
+                margin: 20px auto;
+            }
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="card shadow">
+                        <div class="card-header bg-primary text-white">
+                            <h1 class="h3 mb-0">OBilet Otel Odası Arama Sistemi</h1>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-4">
+                                <div class="col-md-8">
+                                    <div class="mb-3">
+                                        <label for="queryInput" class="form-label">Arama Sorgusu:</label>
+                                        <input type="text" class="form-control" id="queryInput" 
+                                               placeholder="Örn: Deniz manzaralı çift kişilik oda">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 d-flex align-items-end">
+                                    <button class="btn btn-primary me-2" id="searchBtn">Ara</button>
+                                    <button class="btn btn-secondary" id="analyzeBtn">Görselleri Analiz Et</button>
+                                </div>
+                            </div>
+                            
+                            <div id="loader" class="loader"></div>
+                            
+                            <div id="statusBox" class="alert alert-info mb-4" style="display:none;"></div>
+                            
+                            <div id="resultsContainer">
+                                <h2 class="h4 mb-3" id="resultsHeader" style="display:none;">Arama Sonuçları</h2>
+                                <div id="resultsContent" class="row"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const queryInput = document.getElementById('queryInput');
+                const searchBtn = document.getElementById('searchBtn');
+                const analyzeBtn = document.getElementById('analyzeBtn');
+                const statusBox = document.getElementById('statusBox');
+                const resultsHeader = document.getElementById('resultsHeader');
+                const resultsContent = document.getElementById('resultsContent');
+                const loader = document.getElementById('loader');
+                
+                // Search button click handler
+                searchBtn.addEventListener('click', function() {
+                    const query = queryInput.value.trim();
+                    if (!query) {
+                        showStatus('error', 'Lütfen bir arama sorgusu girin.');
+                        return;
+                    }
+                    
+                    performSearch(query);
+                });
+                
+                // Analyze button click handler
+                analyzeBtn.addEventListener('click', function() {
+                    if (confirm('Tüm görselleri analiz etmek ister misiniz? Bu işlem biraz zaman alabilir.')) {
+                        analyzeImages(false);
+                    }
+                });
+                
+                // Enter key press in query input
+                queryInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        searchBtn.click();
+                    }
+                });
+                
+                // Perform search
+                function performSearch(query) {
+                    showLoader(true);
+                    showStatus('info', 'Arama yapılıyor...');
+                    
+                    const formData = new FormData();
+                    formData.append('query', query);
+                    
+                    fetch('/search', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        showLoader(false);
+                        
+                        if (data.status === 'success') {
+                            if (data.count > 0) {
+                                showStatus('success', `"${query}" sorgusu için ${data.count} sonuç bulundu.`);
+                                displayResults(data.results, data.structured_query);
+                            } else {
+                                showStatus('warning', `"${query}" sorgusu için sonuç bulunamadı.`);
+                                resultsHeader.style.display = 'none';
+                                resultsContent.innerHTML = '';
+                            }
+                        } else {
+                            showStatus('error', data.message || 'Arama sırasında bir hata oluştu.');
+                        }
+                    })
+                    .catch(error => {
+                        showLoader(false);
+                        showStatus('error', 'Bağlantı hatası: ' + error.message);
+                    });
+                }
+                
+                // Analyze images
+                function analyzeImages(force = false) {
+                    showLoader(true);
+                    showStatus('info', 'Görseller analiz ediliyor. Bu işlem biraz zaman alabilir...');
+                    
+                    const formData = new FormData();
+                    formData.append('force', force ? 'true' : 'false');
+                    
+                    fetch('/analyze', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        showLoader(false);
+                        
+                        if (data.status === 'success') {
+                            showStatus('success', data.message);
+                        } else {
+                            showStatus('error', data.message || 'Analiz sırasında bir hata oluştu.');
+                        }
+                    })
+                    .catch(error => {
+                        showLoader(false);
+                        showStatus('error', 'Bağlantı hatası: ' + error.message);
+                    });
+                }
+                
+                // Display search results
+                function displayResults(results, structuredQuery) {
+                    resultsHeader.style.display = 'block';
+                    resultsContent.innerHTML = '';
+                    
+                    results.forEach(result => {
+                        const matchRoom = result.matches.room_type ? 'match-true' : 'match-false';
+                        const matchCapacity = result.matches.max_capacity ? 'match-true' : 'match-false';
+                        const matchView = result.matches.view_type ? 'match-true' : 'match-false';
+                        
+                        let featuresHtml = '';
+                        if (result.features && result.features.length > 0) {
+                            featuresHtml = '<div class="feature-list mt-2">';
+                            result.features.forEach(feature => {
+                                const isMatched = result.matches.features && 
+                                                 result.matches.features.matches.includes(feature.toLowerCase());
+                                featuresHtml += `<span class="feature-item ${isMatched ? 'match-true' : ''}">${feature}</span>`;
+                            });
+                            featuresHtml += '</div>';
+                        }
+                        
+                        const resultHtml = `
+                            <div class="col-md-6">
+                                <div class="card result-card h-100">
+                                    <img src="${result.image_url}" class="card-img-top" alt="Oda görseli" style="height: 200px; object-fit: cover;">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-start mb-2">
+                                            <h5 class="card-title mb-0">#${result.rank} ${result.room_type}</h5>
+                                            <span class="badge bg-primary">${result.combined_score}%</span>
+                                        </div>
+                                        
+                                        <div class="score-bar w-100 bg-success" style="opacity: ${result.combined_score/100}"></div>
+                                        
+                                        <ul class="list-group list-group-flush mb-3">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <span class="match-indicator ${matchRoom}">Oda Tipi:</span>
+                                                <span>${result.room_type}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <span class="match-indicator ${matchCapacity}">Kapasite:</span>
+                                                <span>${result.max_capacity} kişi</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <span class="match-indicator ${matchView}">Manzara:</span>
+                                                <span>${result.view_type}</span>
+                                            </li>
+                                        </ul>
+                                        
+                                        <div class="mb-3">
+                                            <strong>Özellikler:</strong>
+                                            ${featuresHtml}
+                                        </div>
+                                        
+                                        <p class="card-text small">${result.description}</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="small text-muted">
+                                            <div>Anahtar Kelime Skoru: ${result.keyword_score}%</div>
+                                            <div>Semantik Skor: ${result.semantic_score}%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        
+                        resultsContent.innerHTML += resultHtml;
+                    });
+                }
+                
+                // Show status message
+                function showStatus(type, message) {
+                    statusBox.style.display = 'block';
+                    statusBox.textContent = message;
+                    
+                    statusBox.className = 'alert mb-4';
+                    switch (type) {
+                        case 'success':
+                            statusBox.classList.add('alert-success');
+                            break;
+                        case 'error':
+                            statusBox.classList.add('alert-danger');
+                            break;
+                        case 'warning':
+                            statusBox.classList.add('alert-warning');
+                            break;
+                        default:
+                            statusBox.classList.add('alert-info');
+                    }
+                    
+                    // Auto-hide success messages after 5 seconds
+                    if (type === 'success') {
+                        setTimeout(() => {
+                            statusBox.style.display = 'none';
+                        }, 5000);
+                    }
+                }
+                
+                // Show/hide loader
+                function showLoader(show) {
+                    loader.style.display = show ? 'block' : 'none';
+                }
+            });
+        </script>
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+    </html>
+    
