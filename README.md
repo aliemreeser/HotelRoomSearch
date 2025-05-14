@@ -152,13 +152,4 @@ The web application provides two main API endpoints:
 - The hybrid search algorithm can be tuned by adjusting weights and thresholds
 - Analysis results are stored in JSON format for persistence between sessions
 
-## Future Improvements
-
-Potential enhancements for the system:
-
-1. Support for additional room attributes (bathroom type, amenities, accessibility)
-2. Enhanced UI with filters, sorting options, and pagination
-3. Performance optimizations for larger datasets
-4. Integration with booking systems
-5. Multi-language support for queries and results
-6. Advanced filtering options in the web interface 
+ 

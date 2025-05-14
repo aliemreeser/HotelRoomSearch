@@ -71,7 +71,7 @@ class VisionAgent:
             "max_capacity": integer or null,
             "view_type":    "sea | city | garden | mountain | pool | none | \"\"",
             "features":     ["any visible feature as a string", …],
-            "description":  "A paragraph describing the room and visible features."
+            "description":  "A brief paragraph describing the room and visible features."
             }
 
             **Rules:**
